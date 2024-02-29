@@ -9,7 +9,22 @@ This repository contains files to set up a Docker container with a PostgreSQL da
    ```bash
    git clone <repository_url>
    cd <repository_directory>
+   ```
 
-2. Create an external docker volume, run: ```bash docker volume create dbtuto
-3. Run docker-compose up --build
-4. To access the database, run the command: psql -d tutos -U tuto
+2. Create an external docker volume:
+
+   ```bash
+   docker volume create dbtuto
+   ```
+
+3. Run docker-compose up:
+
+   ```bash
+   docker-compose up --build
+   ```
+
+4. To access the database, run the following command:
+
+   ```bash
+   psql -d tutos -U tuto
+   ```
