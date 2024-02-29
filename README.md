@@ -28,3 +28,8 @@ This repository contains files to set up a Docker container with a PostgreSQL da
    ```bash
    psql -d tutos -U tuto
    ```
+
+If that didn't work, try 
+```bash
+sudo docker exec -it postgres_tuto psql -d tutos -U tuto
+```
