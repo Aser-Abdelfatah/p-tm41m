@@ -50,10 +50,10 @@ def get_table_ddl(database_name, host, user, password):
 
 # Example usage
 if __name__ == "__main__":
-    database_name = "your_database_name"
+    database_name = "tutos"
     host = "localhost"
-    user = "your_username"
-    password = "your_password"
+    user = "tuto"
+    password = "admingres"
 
     ddl_statements = get_table_ddl(database_name, host, user, password)
     for ddl in ddl_statements:
