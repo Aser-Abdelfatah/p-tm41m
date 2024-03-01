@@ -2,7 +2,7 @@ version: '3.3'
 services:
   postgres:
     build:
-      context: .
+      context: ./database
       dockerfile: postgres.dockerfile
     image: "postgres-demo"
     container_name: ${PG_CONTAINER_NAME}
@@ -16,6 +16,8 @@ services:
     ports:
       - "5432:5432"
     restart: unless-stopped
+  python:
+    build: ./python_files/
 volumes:
     dbtuto:
       external: true
