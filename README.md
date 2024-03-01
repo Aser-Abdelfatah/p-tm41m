@@ -2,7 +2,7 @@
 
 This repository contains files to set up a Docker container with a PostgreSQL database and a Python application.
 
-## How to Use
+## How to Set up Docker:
 
 1. Clone this repository:
 
@@ -29,7 +29,7 @@ This repository contains files to set up a Docker container with a PostgreSQL da
    psql -d tutos -U tuto
    ```
 
-If that didn't work, try 
-```bash
-sudo docker exec -it postgres_tuto psql -d tutos -U tuto
-```
+   If that didn't work, try 
+   ```bash
+   sudo docker exec -it postgres_tuto psql -d tutos -U tuto
+   ```
