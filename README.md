@@ -20,7 +20,7 @@ This repository contains files to set up a Docker container with a PostgreSQL da
 3. Run docker-compose up:
 
    ```bash
-   docker-compose up --build
+   docker-compose up --build -d
    ```
 
 4. To access the database, run the following command:
