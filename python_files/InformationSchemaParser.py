@@ -11,16 +11,22 @@ class DatabaseDDLGenerator:
         self.password = password
         self.ddl_statements = []  # To store generated DDL statements
         self.marshalled_ddl_statements = ""  # JSON string
+        # Connect to the database
+        self.connection = psycopg2.connect(host=self.host,
+                                      user=self.user,
+                                      password=self.password,
+                                      database=self.database_name)
 
     def generate_ddl_statements(self):
-        # Connect to the database
-        connection = psycopg2.connect(host=self.host,
+        # ensure connection is still valid
+        if(self.connection.closed == 1):
+            self.connection = psycopg2.connect(host=self.host,
                                       user=self.user,
                                       password=self.password,
                                       database=self.database_name)
 
         try:
-            with connection.cursor() as cursor:
+            with self.connection.cursor() as cursor:
                 # Get table names
                 cursor.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'")
                 tables = cursor.fetchall()
@@ -86,7 +92,7 @@ class DatabaseDDLGenerator:
                     }
                     self.ddl_statements.append(ddl_dict)
         finally:
-            connection.close()
+            self.connection.close()
 
     def marshal_ddl_statements(self):
         # Convert the ddl_statements list of dictionaries to a JSON string
