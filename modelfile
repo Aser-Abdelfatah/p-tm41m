@@ -1,0 +1,61 @@
+# Custom modelfile created to generate insights from given DDL tables for tm41m project
+# 
+
+FROM sqlcoder:latest
+TEMPLATE """{{ .Prompt }}"""
+ PARAMETER top_k 0
+ PARAMETER top_p 0
+# PARAMETER num_ctx 256
+
+
+
+PARAMETER stop "<|endoftext|>"
+
+MESSAGE system """
+The products table schema looks like this:
+
+CREATE TABLE products (
+  product_id INTEGER PRIMARY KEY, -- Unique ID for each product
+  name VARCHAR(50), -- Name of the product
+  price DECIMAL(10,2), -- Price of each unit of the product
+  quantity INTEGER  -- Current quantity in stock
+);"""
+MESSAGE system """
+
+The customers table schema looks like this:
+CREATE TABLE customers (
+   customer_id INTEGER PRIMARY KEY, -- Unique ID for each customer
+   name VARCHAR(50), -- Name of the customer
+   address VARCHAR(100) -- Mailing address of the customer
+);"""
+
+MESSAGE user what is the products table schema?
+MESSAGE assistant """CREATE TABLE products (
+  product_id INTEGER PRIMARY KEY, -- Unique ID for each product
+  name VARCHAR(50), -- Name of the product
+  price DECIMAL(10,2), -- Price of each unit of the product
+  quantity INTEGER  -- Current quantity in stock
+);"""
+
+LICENSE """
+Copyright (c) 2024-2025 Ethan Zhang and Others
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+Software), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED AS IS, WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+"""
