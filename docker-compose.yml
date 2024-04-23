@@ -16,8 +16,27 @@ services:
     ports:
       - "5432:5432"
     restart: unless-stopped
+    networks:
+      - sqlcoder_network
+
+  ollama:
+    image: "ollama/ollama"
+    container_name: "ollama_container"
+    depends_on:
+      - postgres
+    restart: unless-stopped
+    ports:
+      - "11434:11434"  # Port mapping for Ollama service
+    networks:
+      - sqlcoder_network
+  
   python:
     build: ./python_files/
+
+networks:
+  sqlcoder_network:
+    driver: bridge
+
 volumes:
-    dbtuto:
-      external: true
+  dbtuto:
+    external: true
