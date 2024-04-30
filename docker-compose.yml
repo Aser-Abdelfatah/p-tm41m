@@ -26,7 +26,7 @@ services:
       - postgres
     restart: unless-stopped
     ports:
-      - "11434:11434"  # Port mapping for Ollama service
+      - "11435:11435"  # Port mapping for Ollama service
     networks:
       - sqlcoder_network
   
