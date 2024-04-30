@@ -1,4 +1,4 @@
-from InformationSchemaParser import DatabaseDDLGenerator
+from informationSchemaParser import DatabaseDDLGenerator
 from ollama import Client
 import json
 import psycopg2
