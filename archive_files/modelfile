@@ -1,0 +1,40 @@
+# Custom modelfile created to generate insights from given DDL tables for tm41m project
+# 
+
+FROM sqlcoder:latest
+TEMPLATE """{{ .Prompt }}"""
+
+SYSTEM """
+Your task is to convert a question into a SQL query, given a Postgres database schema.
+Adhere to these rules:
+- **Deliberately go through the question and database schema word by word** to appropriately answer the question
+- **Use Table Aliases** to prevent ambiguity. For example, `SELECT table1.col1, table2.col1 FROM table1 JOIN table2 ON table1.id = table2.id`.
+- When creating a ratio, always cast the numerator as float
+"""
+
+MESSAGE system """
+The products table schema looks like this:
+
+CREATE TABLE products (
+  product_id INTEGER PRIMARY KEY, -- Unique ID for each product
+  name VARCHAR(50), -- Name of the product
+  price DECIMAL(10,2), -- Price of each unit of the product
+  quantity INTEGER  -- Current quantity in stock
+);"""
+MESSAGE system """
+
+The customers table schema looks like this:
+CREATE TABLE customers (
+   customer_id INTEGER PRIMARY KEY, -- Unique ID for each customer
+   name VARCHAR(50), -- Name of the customer
+   address VARCHAR(100) -- Mailing address of the customer
+);"""
+
+MESSAGE user what is the products table schema?
+MESSAGE assistant """CREATE TABLE products (
+  product_id INTEGER PRIMARY KEY, -- Unique ID for each product
+  name VARCHAR(50), -- Name of the product
+  price DECIMAL(10,2), -- Price of each unit of the product
+  quantity INTEGER  -- Current quantity in stock
+);"""
+
