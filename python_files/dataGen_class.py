@@ -33,6 +33,7 @@ class dataGenerator:
           ```sql
           """
         input_entire_message = input_instructions + '\n' + '\n' + input_init_message + '\n' + input_script_message + '\n'+ '\n'+  '\n' + input_response
+        print(input_entire_message)
 
         client = Client(host='http://localhost:11434')
         response = client.chat(model='sqlcoder', messages=[
