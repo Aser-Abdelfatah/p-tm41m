@@ -1,2 +1,5 @@
 sqlalchemy
 psycopg2-binary
+json
+ollama
+
