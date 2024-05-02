@@ -30,8 +30,7 @@ services:
     networks:
       - sqlcoder_network
   
-  python:
-    build: ./python_files/
+
 
 networks:
   sqlcoder_network:

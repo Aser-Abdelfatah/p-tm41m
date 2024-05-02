@@ -1,4 +1,6 @@
+import argparse
 import json
+import sys
 
 import psycopg2
 from ollama import Client
@@ -32,7 +34,7 @@ class dataGenerator:
         input_script_message = self.ddl_generator.ddl_statements_prompt()
         input_response = f"""
           ### Response:
-          Based on your instructions, here is the SQL query I have generated to answer the question `{question}`:
+          Based on your instructions, here is the SQL query I have generated to answer the question \n `{question}` \n:
           ```sql
           """
         input_entire_message = input_instructions + '\n' + '\n' + input_init_message + '\n' + input_script_message + '\n'+ '\n'+  '\n' + input_response
@@ -74,5 +76,9 @@ class dataGenerator:
 #     print(chunk['message']['content'], end='', flush=True)
 
 # Example Usage
-modelRun = dataGenerator("tutos","localhost","tuto","admingres")
-modelRun.input_question("What are our top 3 products by revenue in the New York region")
+modelRun = dataGenerator("postgres","localhost","postgres","123456")
+parser = argparse.ArgumentParser()
+parser.add_argument( '--q', type=str)           # positional argument
+args = parser.parse_args()
+
+modelRun.input_question(args.q)

@@ -15,7 +15,8 @@ class DatabaseDDLGenerator:
         self.connection = psycopg2.connect(host=self.host,
                                       user=self.user,
                                       password=self.password,
-                                      database=self.database_name)
+                                      database=self.database_name,
+                                      port = 5432)
         self.generate_ddl_statements()
         self.marshalled_ddl_statements = self.marshal_ddl_statements()
         self.unmarshal_ddl_statements()  # Deserialize back to Python objects
@@ -120,10 +121,10 @@ class DatabaseDDLGenerator:
 
 # Example usage
 if __name__ == "__main__":
-    database_name = "tutos"
+    database_name = "pagila"
     host = "localhost"
-    user = "tuto"
-    password = "admingres"
+    user = "postgres"
+    password = "123456"
 
     ddl_generator = DatabaseDDLGenerator(database_name, host, user, password)
    
