@@ -1,0 +1,46 @@
+version: "3"
+volumes:
+  pgdata:
+services:
+  pagila:
+    image: postgres:13.2
+    container_name: pagila
+    environment:
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_USER: postgres
+    volumes:
+      - ./pagila-schema.sql:/docker-entrypoint-initdb.d/1-pagila-schema.sql
+      - ./pagila-data.sql:/docker-entrypoint-initdb.d/2-pagila-data.sql
+      - pgdata:/var/lib/postgresql/data 
+    expose:
+      - 5432
+    ports:
+      - 5432:5432
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    restart: unless-stopped
+    networks:
+      - sqlcoder_network
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+
+  ollama:
+    image: "ollama/ollama"
+    container_name: "ollama_container"
+    depends_on:
+      - pagila
+    restart: unless-stopped
+    ports:
+      - "11435:11435"  # Port mapping for Ollama service
+    networks:
+      - sqlcoder_network
+  
+
+
+networks:
+  sqlcoder_network:
+    driver: bridge
